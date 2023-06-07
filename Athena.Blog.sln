@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena.Shared", "..\Athena\src\Athena.Shared\Athena.Shared.csproj", "{1A0A24A4-F97B-4DE6-99CE-99F1D4CA79BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena.Blog.CMS", "Athena.Blog.CMS\Athena.Blog.CMS.csproj", "{29FCE711-36F7-406B-9B30-4F1AAD8507FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A0A24A4-F97B-4DE6-99CE-99F1D4CA79BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0A24A4-F97B-4DE6-99CE-99F1D4CA79BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0A24A4-F97B-4DE6-99CE-99F1D4CA79BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0A24A4-F97B-4DE6-99CE-99F1D4CA79BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29FCE711-36F7-406B-9B30-4F1AAD8507FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29FCE711-36F7-406B-9B30-4F1AAD8507FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29FCE711-36F7-406B-9B30-4F1AAD8507FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29FCE711-36F7-406B-9B30-4F1AAD8507FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
