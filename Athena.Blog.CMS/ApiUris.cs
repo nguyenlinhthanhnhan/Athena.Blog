@@ -14,4 +14,13 @@ public static class ApiUris
         
         public const string DeleteCategory = "categories/{id}";
     }
+
+    public static class Authentication
+    {
+        public const string Authenticate = "authentication/auth";
+        
+        public const string RefreshToken = "authentication/refresh";
+        
+        public const string Revoke = "authentication/revoke";
+    }
 }

@@ -33,7 +33,7 @@ public class CategoryRepository : ICategoryRepository
             var err = JsonSerializer.Deserialize<ApiException>(content, _jsonSerializerOptions);
             throw err;
         }
-
+    
         var categories = JsonSerializer.Deserialize<ViewCategoriesDto>(content, _jsonSerializerOptions);
 
         return categories;
