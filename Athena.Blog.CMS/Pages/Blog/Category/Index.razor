@@ -1,6 +1,34 @@
 ﻿@page "/blog/categories"
+@using Athena.Blog.CMS.HttpRepositories
+@using Athena.Blog.CMS.Models
+@using Athena.Blog.CMS.Helpers
 <h3>List categories</h3>
 
 @code {
+    [Inject]
+    public ICategoryRepository CategoryRepository { get; set; }
     
+    [Inject]
+    public MessageService Message { get; set; }
+    
+    private ViewCategoriesDto categories = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var query = new GetCategoriesQuery();
+            categories = await CategoryRepository.GetCategories(query);
+        
+            categories.Items.ForEach(x=>Console.WriteLine(x.Title));
+        }
+        catch(ApiException e)
+        {
+            await Message.Error($"{e.Detail}");
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 }
