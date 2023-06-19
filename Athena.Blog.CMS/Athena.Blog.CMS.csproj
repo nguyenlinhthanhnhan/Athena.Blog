@@ -17,6 +17,7 @@
         <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
         <PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.3" />
         <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
+        <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.2.0" />
     </ItemGroup>
 
     <ItemGroup>
