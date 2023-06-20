@@ -72,7 +72,7 @@ public partial class RightContent
                 break;
             case "logout":
                 await AuthenticationService.Logout();
-                NavigationManager.NavigateTo("/login", forceLoad: true);
+                NavigationManager.NavigateTo("/", forceLoad: true);
                 break;
         }
     }
