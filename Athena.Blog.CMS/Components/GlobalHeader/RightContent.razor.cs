@@ -2,16 +2,19 @@
 using System.Threading.Tasks;
 using AntDesign;
 using AntDesign.ProLayout;
+using Athena.Blog.CMS.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace Athena.Blog.CMS.Components;
 
 public partial class RightContent
 {
+    [Inject] public IAuthenticationService AuthenticationService { get; set; }
+
     private NoticeIconData[] _notifications = { };
     private NoticeIconData[] _messages = { };
     private NoticeIconData[] _events = { };
-    private int _count = 0;
+    private readonly int _count = 0;
 
     private List<AutoCompleteDataItem<string>> DefaultOptions { get; set; } = new List<AutoCompleteDataItem<string>>
     {
@@ -32,7 +35,8 @@ public partial class RightContent
         }
     };
 
-    public AvatarMenuItem[] AvatarMenuItems { get; set; } = {
+    public AvatarMenuItem[] AvatarMenuItems { get; set; } =
+    {
         new() { Key = "center", IconType = "user", Option = "Profile" },
         new() { Key = "setting", IconType = "setting", Option = "Setting" },
         new() { IsDivider = true },
@@ -67,7 +71,8 @@ public partial class RightContent
                 NavigationManager.NavigateTo("/account/settings");
                 break;
             case "logout":
-                NavigationManager.NavigateTo("/user/login");
+                AuthenticationService.Logout();
+                NavigationManager.NavigateTo("/login");
                 break;
         }
     }
@@ -91,7 +96,7 @@ public partial class RightContent
                 break;
         }
 
-        await MessageService.Success($"清空了{key}");
+        await MessageService.Success($"{key} has been cleared");
     }
 
     public async Task HandleViewMore(string key)

@@ -49,22 +49,31 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<string> RefreshToken()
     {
-        var token = await _localStorage.GetItemAsync<string>("accessToken");
         var refreshToken = await _localStorage.GetItemAsync<string>("refreshToken");
 
-        var response = await _httpClient.GetAsync($"token/refresh?refreshToken={refreshToken}");
+        var response = await _httpClient.GetAsync($"{ApiUris.Authentication.RefreshToken}?refreshToken={refreshToken}");
         var content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
             var error = JsonSerializer.Deserialize<ApiException>(content, _jsonSerializerOptions);
             throw error;
         }
-        
+
         var result = JsonSerializer.Deserialize<AuthResponseDto>(content, _jsonSerializerOptions);
         await _localStorage.SetItemAsync("authToken", result.AccessToken);
         await _localStorage.SetItemAsync("refreshToken", result.RefreshToken);
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
         return result.AccessToken;
+    }
+
+    public async Task Logout()
+    {
+        await _httpClient.GetAsync(ApiUris.Authentication.Revoke);
+
+        _httpClient.DefaultRequestHeaders.Authorization = null;
+
+        await _localStorage.RemoveItemAsync("accessToken");
+        await _localStorage.RemoveItemAsync("refreshToken");
     }
 }

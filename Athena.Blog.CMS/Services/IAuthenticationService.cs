@@ -8,4 +8,6 @@ public interface IAuthenticationService
     Task<AuthResponseDto> Authenticate(AuthRequestDto request);
     
     Task<string> RefreshToken();
+    
+    Task Logout();
 }

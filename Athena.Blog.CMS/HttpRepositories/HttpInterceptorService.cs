@@ -20,7 +20,8 @@ public class HttpInterceptorService
     public async Task InterceptBeforeHttpAsync(object sender, HttpClientInterceptorEventArgs e)
     {
         var absPath = e.Request.RequestUri.AbsolutePath;
-        if (!absPath.Contains("token") && !absPath.Contains("accounts"))
+        // If not contain authentication/refresh or authentication/auth, then call refresh token
+        if (!absPath.Contains("authentication/refresh") && !absPath.Contains("authentication/auth"))
         {
             var token = await _refreshTokenService.TryRefreshToken();
             if (!string.IsNullOrEmpty(token))

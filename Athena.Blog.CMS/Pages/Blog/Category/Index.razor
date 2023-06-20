@@ -6,6 +6,9 @@
 
 @code {
     [Inject]
+    public HttpInterceptorService HttpInterceptor { get; set; }
+    
+    [Inject]
     public ICategoryRepository CategoryRepository { get; set; }
     
     [Inject]
@@ -15,6 +18,7 @@
     
     protected override async Task OnInitializedAsync()
     {
+        HttpInterceptor.RegisterEvent();
         try
         {
             var query = new GetCategoriesQuery();
