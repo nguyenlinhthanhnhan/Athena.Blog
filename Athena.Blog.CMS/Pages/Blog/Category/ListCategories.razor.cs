@@ -1,10 +1,15 @@
-﻿@page "/blog/categories"
-@using Athena.Blog.CMS.HttpRepositories
-@using Athena.Blog.CMS.Models
-@using Athena.Blog.CMS.Helpers
-<h3>List categories</h3>
+﻿using System;
+using System.Threading.Tasks;
+using AntDesign;
+using Athena.Blog.CMS.Helpers;
+using Athena.Blog.CMS.HttpRepositories;
+using Athena.Blog.CMS.Models;
+using Microsoft.AspNetCore.Components;
 
-@code {
+namespace Athena.Blog.CMS.Pages.Blog.Category;
+
+public partial class ListCategories : IDisposable
+{
     [Inject]
     public HttpInterceptorService HttpInterceptor { get; set; }
     
@@ -18,9 +23,9 @@
     
     protected override async Task OnInitializedAsync()
     {
-        HttpInterceptor.RegisterEvent();
         try
         {
+            HttpInterceptor.RegisterEvent();
             var query = new GetCategoriesQuery();
             categories = await CategoryRepository.GetCategories(query);
         
@@ -33,6 +38,20 @@
         catch(Exception e)
         {
             Console.WriteLine(e.Message);
+        }
+    }
+    
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+    
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            HttpInterceptor.DisposeEvent();
         }
     }
 }

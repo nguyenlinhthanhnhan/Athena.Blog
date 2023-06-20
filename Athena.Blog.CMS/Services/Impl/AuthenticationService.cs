@@ -49,9 +49,16 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<string> RefreshToken()
     {
+        var accessToken = await _localStorage.GetItemAsync<string>("accessToken");
         var refreshToken = await _localStorage.GetItemAsync<string>("refreshToken");
+        
+        var request = new RefreshTokenRequest
+        {
+            AccessToken = accessToken,
+            RefreshToken = refreshToken
+        };
 
-        var response = await _httpClient.GetAsync($"{ApiUris.Authentication.RefreshToken}?refreshToken={refreshToken}");
+        var response = await _httpClient.PostAsJsonAsync(ApiUris.Authentication.RefreshToken, request);
         var content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -60,6 +67,13 @@ public class AuthenticationService : IAuthenticationService
         }
 
         var result = JsonSerializer.Deserialize<AuthResponseDto>(content, _jsonSerializerOptions);
+
+        if (!result.IsAuthenticated)
+        {
+            await Logout();
+            throw new UnauthorizedAccessException("Something went wrong during the refresh token process");
+        }
+        
         await _localStorage.SetItemAsync("accessToken", result.AccessToken);
         await _localStorage.SetItemAsync("refreshToken", result.RefreshToken);
 
