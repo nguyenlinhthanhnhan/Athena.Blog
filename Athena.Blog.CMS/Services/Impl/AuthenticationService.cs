@@ -60,7 +60,7 @@ public class AuthenticationService : IAuthenticationService
         }
 
         var result = JsonSerializer.Deserialize<AuthResponseDto>(content, _jsonSerializerOptions);
-        await _localStorage.SetItemAsync("authToken", result.AccessToken);
+        await _localStorage.SetItemAsync("accessToken", result.AccessToken);
         await _localStorage.SetItemAsync("refreshToken", result.RefreshToken);
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
