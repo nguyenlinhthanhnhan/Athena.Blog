@@ -3,21 +3,6 @@
 
 <Space Class="@ClassMapper.Class" Size="@("24")">
     <SpaceItem>
-        <HeaderSearch Class="action search"
-                      Placeholder="Site Search"
-                      DefaultValue="umi ui"
-                      Options="DefaultOptions" />
-    </SpaceItem>
-    <SpaceItem>
-        <AntDesign.Tooltip Title="@("Help")" Placement="@Placement.Bottom">
-            <Unbound>
-                <span @ref="@context.Current" class="action">
-                    <Icon Type="question-circle" Theme="outline" />
-                </span>
-            </Unbound>
-        </AntDesign.Tooltip>
-    </SpaceItem>
-    <SpaceItem>
         <NoticeIcon ClearText="Empty"
                     ViewMoreText="see more"
                     Count="_count"
@@ -42,10 +27,8 @@
     </SpaceItem>
     <SpaceItem>
         <AvatarDropdown Name="Demo User"
+                        Avatar="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
                         MenuItems="@AvatarMenuItems"
                         OnItemSelected="HandleSelectUser" />
-    </SpaceItem>
-    <SpaceItem>
-        <SelectLang OnItemSelected="HandleSelectLang" />
     </SpaceItem>
 </Space>

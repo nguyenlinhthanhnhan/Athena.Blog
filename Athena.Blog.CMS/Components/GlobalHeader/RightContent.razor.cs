@@ -16,7 +16,7 @@ public partial class RightContent
     private NoticeIconData[] _events = { };
     private readonly int _count = 0;
 
-    private List<AutoCompleteDataItem<string>> DefaultOptions { get; set; } = new List<AutoCompleteDataItem<string>>
+    private List<AutoCompleteDataItem<string>> DefaultOptions { get; set; } = new()
     {
         new AutoCompleteDataItem<string>
         {
@@ -75,10 +75,6 @@ public partial class RightContent
                 NavigationManager.NavigateTo("/login", forceLoad: true);
                 break;
         }
-    }
-
-    public void HandleSelectLang(MenuItem item)
-    {
     }
 
     public async Task HandleClear(string key)
