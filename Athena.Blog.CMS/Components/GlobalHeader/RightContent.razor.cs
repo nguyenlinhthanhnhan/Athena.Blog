@@ -60,7 +60,7 @@ public partial class RightContent
             .Add("right");
     }
 
-    public void HandleSelectUser(MenuItem item)
+    public async Task HandleSelectUser(MenuItem item)
     {
         switch (item.Key)
         {
@@ -71,8 +71,8 @@ public partial class RightContent
                 NavigationManager.NavigateTo("/account/settings");
                 break;
             case "logout":
-                AuthenticationService.Logout();
-                NavigationManager.NavigateTo("/login");
+                await AuthenticationService.Logout();
+                NavigationManager.NavigateTo("/login", forceLoad: true);
                 break;
         }
     }

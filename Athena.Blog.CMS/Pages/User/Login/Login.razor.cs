@@ -19,14 +19,8 @@ public partial class Login
 
     [Inject] public IAuthenticationService AuthenticationService { get; set; }
 
-    public bool ShowAuthError { get; set; }
-
-    public string Error { get; set; }
-
     public async Task HandleSubmit()
     {
-        ShowAuthError = false;
-
         try
         {
             var response = await AuthenticationService.Authenticate(new AuthRequestDto
@@ -37,9 +31,12 @@ public partial class Login
 
             if (response.IsAuthenticated)
             {
-                // Check if returnUrl is has value
                 var returnUrl = NavigationManager.QueryString("returnUrl");
-                NavigationManager.NavigateTo(!string.IsNullOrEmpty(returnUrl) ? returnUrl : "/");
+                NavigationManager.NavigateTo(!string.IsNullOrEmpty(returnUrl) ? returnUrl : "/", forceLoad: true);
+            }
+            else
+            {
+                Message.Error("Invalid credentials");
             }
         }
         catch (ApiException e)
