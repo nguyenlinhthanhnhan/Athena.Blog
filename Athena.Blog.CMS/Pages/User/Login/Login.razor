@@ -6,14 +6,14 @@
     <div class="login">
         <Form Model="@_model" OnFinish="HandleSubmit">
             <FormItem>
-                <AntDesign.Input Placeholder="Username: admin or user" Size="large" @bind-Value="@context.Email">
+                <AntDesign.Input Placeholder="Email" Size="large" @bind-Value="@context.Email">
                     <Prefix>
                         <Icon Type="user"/>
                     </Prefix>
                 </AntDesign.Input>
             </FormItem>
             <FormItem>
-                <AntDesign.Input Placeholder="Password: ant.design" Size="large" @bind-Value="@context.Password" Type="password">
+                <AntDesign.Input Placeholder="Password" Size="large" @bind-Value="@context.Password" Type="password">
                     <Prefix>
                         <Icon Type="lock"/>
                     </Prefix>
